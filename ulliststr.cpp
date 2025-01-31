@@ -145,7 +145,7 @@ size_t ULListStr::size() const
     //case3: Only 1 value, just delete first array, O(1)
     else{
       Item* temp = head_;
-      head_ = head_->next;//update tail to prev node
+      head_ = head_->next;//update head to next node
       //check for edge case: only one element in whole list
       if (head_ != NULL){
         head_->prev = NULL;
@@ -188,17 +188,17 @@ size_t ULListStr::size() const
     //check if loc is valid
     if (loc >= size_) return NULL;
     Item* current = head_;
-    size_t count = 0; //track how many elements have traversed
+    size_t count = 0; //track how many values have been traversed
     while (current!=NULL){//O(n)
-      //calculate # of elements of current node, O(1)
-      size_t numElements = current->last - current->first;
+      //calculate # of values of current node, O(1)
+      size_t numValues = current->last - current->first;
       //check if exceeding loc using count n # of elements,O(1)
-      if (count + numElements > loc)
+      if (count + numValues > loc)
         //exceeding means loc is inside current node
         return &(current->val[current->first +(loc-count)]);
       //if not,continue finding
       //add # of current node to count
-      count += numElements;
+      count += numValues;
       //proceed to next node
       current = current->next;
     }
